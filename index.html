@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#faf8f3" id="metaTheme">
+<title>CIS 股票交易术｜交易哲学与实战启发 · 911</title>
+<style>
+/* ---------- 浅色（默认） ---------- */
+:root{
+  --bg:#faf8f3;
+  --bg-glow:rgba(216,189,115,.20);
+  --panel:#ffffff;
+  --panel2:#f4f1e9;
+  --gold:#9a7a2e;
+  --gold2:#7c5f1c;
+  --gold-soft:#c8a94e;
+  --muted:#6d6a62;
+  --line:#e2ddcf;
+  --line-strong:#d5cdb9;
+  --text:#1d1e22;
+  --text-2:#3a3b40;
+  --text-3:#5a5850;
+  --card-bg:linear-gradient(145deg,#ffffff,#f7f4ec);
+  --stat-bg:linear-gradient(145deg,#ffffff,#f6f2e8);
+  --callout-bg:linear-gradient(110deg,#fdf4dd,#f8f2e4);
+  --callout-line:#d8bd73;
+  --callout-text:#6d5a26;
+  --warn-bg:#fdf0ed;
+  --warn-line:#e5b8ae;
+  --warn-text:#94453a;
+  --tag-bg:rgba(154,122,46,.10);
+  --header-bg:rgba(250,248,243,.86);
+  --header-line:rgba(0,0,0,.07);
+  --nav:#514f48;
+  --hero-p:#4a4841;
+  --pill-line:rgba(0,0,0,.14);
+  --pill:#54524b;
+  --search-bg:#ffffff;
+  --btn-active-text:#fffaf0;
+  --shadow:0 1px 2px rgba(60,50,30,.05),0 8px 22px rgba(60,50,30,.05);
+  --shadow-hover:0 4px 10px rgba(60,50,30,.07),0 16px 34px rgba(60,50,30,.09);
+  --check-done:#8f8c83;
+}
+/* ---------- 深色 ---------- */
+[data-theme="dark"]{
+  --bg:#101114;
+  --bg-glow:rgba(216,189,115,.26);
+  --panel:#191a1f;
+  --panel2:#202127;
+  --gold:#d8bd73;
+  --gold2:#f0dfa8;
+  --gold-soft:#a58b4d;
+  --muted:#a5a5aa;
+  --line:#34353b;
+  --line-strong:#a58b4d;
+  --text:#f4f1e9;
+  --text-2:#d2d0c9;
+  --text-3:#b9b7b0;
+  --card-bg:linear-gradient(145deg,#1e1f24,#17181c);
+  --stat-bg:linear-gradient(145deg,#222127,#17181c);
+  --callout-bg:linear-gradient(110deg,#3a311d,#211f1a);
+  --callout-line:#9f8548;
+  --callout-text:#d1c8ae;
+  --warn-bg:#2a1e1c;
+  --warn-line:#6c4b42;
+  --warn-text:#d8b8af;
+  --tag-bg:rgba(185,154,75,.13);
+  --header-bg:rgba(16,17,20,.87);
+  --header-line:rgba(255,255,255,.07);
+  --nav:#c5c2b8;
+  --hero-p:#c4c1b8;
+  --pill-line:rgba(255,255,255,.15);
+  --pill:#c8c5bc;
+  --search-bg:#1b1c21;
+  --btn-active-text:#171717;
+  --shadow:0 0 0 transparent;
+  --shadow-hover:0 0 0 transparent;
+  --check-done:#85857f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(ellipse at 80% 0%,var(--bg-glow) 0,transparent 34%),var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7;
+  transition:background .35s ease,color .35s ease;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+
+header{height:72px;border-bottom:1px solid var(--header-line);display:flex;align-items:center;position:sticky;top:0;background:var(--header-bg);backdrop-filter:blur(16px);z-index:10;transition:background .35s ease,border-color .35s ease}
+.nav{display:flex;justify-content:space-between;align-items:center;width:100%}
+.brand{font-weight:800;letter-spacing:2px;font-size:14px}
+.brand span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:24px}
+.navlinks{display:flex;gap:26px;color:var(--nav);font-size:13px;transition:color .35s}
+.navlinks a{position:relative;padding:4px 0}
+.navlinks a:hover{color:var(--gold)}
+.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold);transition:right .25s}
+.navlinks a:hover:after{right:0}
+
+/* 主题切换按钮 */
+.theme-toggle{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line-strong);background:var(--panel);
+  color:var(--text-2);border-radius:99px;padding:7px 14px 7px 11px;
+  font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;
+  font-family:inherit;transition:.22s;box-shadow:var(--shadow);
+}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+.theme-toggle svg{width:15px;height:15px;flex:0 0 auto;transition:transform .35s ease}
+.theme-toggle .ico-sun{display:none}
+[data-theme="dark"] .theme-toggle .ico-sun{display:block}
+[data-theme="dark"] .theme-toggle .ico-moon{display:none}
+[data-theme="dark"] .theme-toggle:hover{color:var(--gold)}
+
+.hero{padding:94px 0 76px;max-width:850px}
+.eyebrow{color:var(--gold);font-size:12px;letter-spacing:3px;font-weight:700}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.13;letter-spacing:-2px;margin:20px 0;color:var(--text)}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{font-size:17px;color:var(--hero-p);max-width:650px}
+.hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.pill{border:1px solid var(--pill-line);border-radius:99px;padding:7px 13px;font-size:12px;color:var(--pill)}
+.hero-quote{border-left:2px solid var(--gold);padding:4px 0 4px 22px;margin-top:38px;font-size:21px;font-weight:650;max-width:690px;color:var(--text)}
+.hero-quote small{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:10px}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:10px 0 75px}
+.stat{background:var(--stat-bg);border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:var(--shadow);transition:.3s}
+.stat b{display:block;font-size:28px;color:var(--gold);letter-spacing:1px}
+.stat span{font-size:12px;color:var(--muted)}
+
+section{padding:32px 0 58px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+.kicker{font-size:11px;color:var(--gold);letter-spacing:2px}
+.section-head h2{font-size:30px;margin:5px 0 0;letter-spacing:-.5px;color:var(--text)}
+.section-head p{color:var(--muted);font-size:13px;margin:0}
+
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+.filter{border:1px solid var(--line);background:transparent;color:var(--text-3);border-radius:99px;padding:8px 14px;cursor:pointer;font-size:12px;font-family:inherit;transition:.2s}
+.filter:hover{border-color:var(--gold);color:var(--gold)}
+.filter.active{background:var(--gold);border-color:var(--gold);color:var(--btn-active-text);font-weight:600}
+.search{width:min(260px,100%);background:var(--search-bg);border:1px solid var(--line);border-radius:10px;padding:10px 13px;color:var(--text);outline:none;font-family:inherit;transition:.2s}
+.search::placeholder{color:var(--muted)}
+.search:focus{border-color:var(--gold)}
+
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:var(--card-bg);border:1px solid var(--line);border-radius:15px;padding:22px;transition:transform .22s,border-color .22s,box-shadow .22s;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.card:hover{transform:translateY(-3px);border-color:var(--gold-soft);box-shadow:var(--shadow-hover)}
+.num{font-size:11px;color:var(--gold);letter-spacing:1px}
+.card h3{font-size:19px;margin:9px 0 8px;color:var(--text)}
+.quote{font-size:17px;font-weight:650;line-height:1.55;color:var(--text)}
+.insight{font-size:13px;color:var(--text-3);margin-top:13px;border-top:1px solid var(--line);padding-top:12px}
+.tag{display:inline-block;font-size:10px;color:var(--gold2);background:var(--tag-bg);padding:3px 8px;border-radius:99px;margin-top:12px}
+
+.callout{margin-top:22px;padding:24px;border:1px solid var(--callout-line);background:var(--callout-bg);border-radius:15px}
+.callout strong{font-size:20px;color:var(--gold2);display:block;line-height:1.5}
+.callout p{margin:5px 0 0;color:var(--callout-text);font-size:13px}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.principle{padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);transition:.3s}
+.principle .big{font-size:28px;color:var(--gold);font-weight:800}
+.principle h3{margin:7px 0;font-size:17px;color:var(--text)}
+.principle p{font-size:13px;color:var(--muted);margin:0}
+
+.workflow{counter-reset:step;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:var(--shadow);transition:.3s}
+.step:before{counter-increment:step;content:"0" counter(step);color:var(--gold);font-size:12px;letter-spacing:2px}
+.step b{display:block;margin:8px 0;color:var(--text)}
+.step span{font-size:12px;color:var(--muted)}
+
+.warning{border:1px solid var(--warn-line);background:var(--warn-bg);border-radius:13px;padding:18px;color:var(--warn-text);font-size:13px;margin-top:20px}
+
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.check{display:flex;align-items:flex-start;gap:11px;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:11px;font-size:13px;color:var(--text-2);cursor:pointer;transition:.2s;box-shadow:var(--shadow)}
+.check:hover{border-color:var(--gold-soft)}
+.check input{accent-color:var(--gold);margin-top:5px;width:15px;height:15px;cursor:pointer}
+.check:has(input:checked){color:var(--check-done);text-decoration:line-through}
+
+footer{border-top:1px solid var(--line);padding:30px 0 42px;color:var(--muted);font-size:12px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot b{color:var(--gold);letter-spacing:2px}
+
+@media(max-width:700px){
+  .navlinks{display:none}
+  .hero{padding:65px 0 50px}
+  .stats{gap:8px;margin-bottom:45px}
+  .stat{padding:14px}.stat b{font-size:22px}
+  .cards,.grid3,.checklist{grid-template-columns:1fr}
+  .workflow{grid-template-columns:repeat(2,1fr)}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .search{width:100%}
+  .hero-quote{font-size:18px}
+  .theme-toggle{padding:7px 12px 7px 10px}
+  .theme-toggle .tt-label{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">911 <span>／</span> TRADING NOTES</div>
+    <div class="nav-right">
+      <nav class="navlinks"><a href="#quotes">核心语录</a><a href="#insight">交易启发</a><a href="#system">执行框架</a><a href="#checklist">交易检查</a></nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换深浅配色" title="切换深浅配色">
+        <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        <span class="tt-label" id="themeLabel">深色</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<div class="hero">
+ <div class="eyebrow">CIS · THE PHILOSOPHY OF TRADING</div>
+ <h1>别预测市场。<br><em>跟随市场。</em></h1>
+ <p>从日本传奇交易员 CIS 的交易思想中，提炼趋势、止损、持盈与纪律。把交易哲学转化为可以执行的规则。</p>
+ <div class="hero-meta"><span class="pill">《CIS 的股票交易术》</span><span class="pill">核心思想整理</span><span class="pill">作者：911</span></div>
+ <div class="hero-quote">交易不是证明自己正确，而是在发现错误时及时修正��并在正确时让利润充分增长。<small>— 911 对 CIS 交易哲学的提炼，并非书中逐字引文</small></div>
+</div>
+
+<div class="stats">
+ <div class="stat"><b>顺势</b><span>让价格决定方向</span></div>
+ <div class="stat"><b>认错</b><span>让亏损保持可控</span></div>
+ <div class="stat"><b>持盈</b><span>让正确的交易奔跑</span></div>
+</div>
+
+<section id="quotes">
+ <div class="section-head"><div><div class="kicker">01 / KEY IDEAS</div><h2>核心语录 · 交易信条</h2></div><input id="search" class="search" placeholder="搜索：趋势、止损、情绪…"></div>
+ <div class="filters">
+  <button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="趋势">趋势</button><button class="filter" data-filter="风险">风险</button><button class="filter" data-filter="盈利">盈利</button><button class="filter" data-filter="纪律">纪律</button>
+ </div>
+ <div class="cards" id="quoteCards">
+  <article class="card" data-cat="趋势"><div class="num">01 / TREND</div><h3>强者恒强</h3><div class="quote">上涨的东西，往往还会继续上涨。</div><div class="insight">交易启发：不要因为涨幅大就轻易做空。趋势没有被破坏前，尊重强势。</div><span class="tag">趋势跟随</span></article>
+  <article class="card" data-cat="趋势"><div class="num">02 / MOMENTUM</div><h3>弱者恒弱</h3><div class="quote">下跌的东西，不会因为跌得多就自动反弹。</div><div class="insight">交易启发：不凭感觉抄底，等待价格给出明确的反转证据。</div><span class="tag">拒绝猜底</span></article>
+  <article class="card" data-cat="风险"><div class="num">03 / RISK</div><h3>不要摊平亏损</h3><div class="quote">不要用不断加仓，来证明最初的判断正确。</div><div class="insight">交易启发：亏损仓位不能无限补仓；加仓必须由新信号触发，并受总风险约束。</div><span class="tag">控制回撤</span></article>
+  <article class="card" data-cat="盈利"><div class="num">04 / PROFIT</div><h3>让利润奔跑</h3><div class="quote">不要因为一点浮盈，就急着结束一笔好交易。</div><div class="insight">交易启发：趋势仍然有效时，避免过早止盈；用规则跟踪退出，而不是情绪退出。</div><span class="tag">盈亏比</span></article>
+  <article class="card" data-cat="风险"><div class="num">05 / CUT LOSS</div><h3>及时承认错误</h3><div class="quote">止损不是失败，拒绝止损才可能让小错变成大错。</div><div class="insight">交易启发：入场前先定义失效条件、止损位置和最大可承受亏损。</div><span class="tag">先活下来</span></article>
+  <article class="card" data-cat="纪律"><div class="num">06 / DISCIPLINE</div><h3>市场比观点重要</h3><div class="quote">不要让自己的主观判断凌驾于市场走势之上。</div><div class="insight">交易启发：信号与观点冲突时，执行预先定义的交易规则，不临时改规则。</div><span class="tag">客观执行</span></article>
+  <article class="card" data-cat="纪律"><div class="num">07 / MINDSET</div><h3>不必每次都正确</h3><div class="quote">长期盈利，比单笔交易的胜负更重要。</div><div class="insight">交易启发：评估系统看期望值、盈亏比、回撤和样本量，而不是只看胜率。</div><span class="tag">长期期望</span></article>
+  <article class="card" data-cat="趋势"><div class="num">08 / RE-ENTRY</div><h3>止损后仍可重新入场</h3><div class="quote">退出一笔错误交易，不代表放弃下一次��会。</div><div class="insight">交易启发：止损后若重新出现有效信号，可以按同一套规则再次入场，不带情绪报复市场。</div><span class="tag">保持灵活</span></article>
+  <article class="card" data-cat="纪律"><div class="num">09 / INDEPENDENCE</div><h3>独立判断</h3><div class="quote">不盲从消息，不把别人的观点当成自己的交易系统。</div><div class="insight">交易启发：每笔交易都要有可复盘的入场理由、退出条件和风险预算。</div><span class="tag">独立思考</span></article>
+  <article class="card" data-cat="盈利"><div class="num">10 / ASYMMETRY</div><h3>寻找非对称机会</h3><div class="quote">用可控的小亏损，换取有空间的大盈利。</div><div class="insight">交易启发：关注风险回报比；不要为了提高胜率，把止损放得无限远。</div><span class="tag">风险回报</span></article>
+ </div>
+ <div id="empty" style="display:none;color:var(--muted);padding:25px;text-align:center">没有找到匹配内容。</div>
+</section>
+
+<section id="insight">
+ <div class="section-head"><div><div class="kicker">02 / PRACTICAL INSIGHT</div><h2>对交易最有价值的启发</h2></div><p>把理念变成可执行的动作</p></div>
+ <div class="grid3">
+  <div class="principle"><div class="big">01</div><h3>方向交给市场</h3><p>不猜顶部和底部。先确认趋势，再考虑入场；没有信号，就保持空仓。</p></div>
+  <div class="principle"><div class="big">02</div><h3>风险先于收益</h3><p>先算错了会亏多少，再考虑对了能赚多少。仓位必须服从止损距离与风险预算。</p></div>
+  <div class="principle"><div class="big">03</div><h3>盈利交给规则</h3><p>不要凭恐惧提前下车。用趋势失效、移动止损或系统退出条件保护利润。</p></div>
+ </div>
+ <div class="callout"><strong>真正的优势，不是预测得更准，而是犯错时亏得少，正确时赚得多。</strong><p>这是将 CIS 思想转化为交易系统时，最值得保留的核心。</p></div>
+</section>
+
+<section id="system">
+ <div class="section-head"><div><div class="kicker">03 / SYSTEM THINKING</div><h2>转化为 BTC / ETH 合约系统</h2></div><p>示例框架，不是直接交易信号</p></div>
+ <div class="workflow">
+  <div class="step"><b>识别趋势</b><span>使用预先定义的周期与趋势指标，判断是否允许做多或做空。</span></div>
+  <div class="step"><b>等待入场</b><span>只在规则触发时开仓，不因新闻、感觉或错过行情而追单。</span></div>
+  <div class="step"><b>限制风险</b><span>设置止损、仓位上限、杠杆上限与账户最大回撤保护。</span></div>
+  <div class="step"><b>规则退出</b><span>趋势失效或退出条件触发时离场；重新出现信号再评估入场。</span></div>
+ </div>
+ <div class="warning">合约特别提醒：趋势判断正确，也可能因过高杠杆、仓位过大、滑点或强平而亏损。止损不保证成交价；必须同时管理保证金、流动性与极端行情风险。</div>
+</section>
+
+<section id="checklist">
+ <div class="section-head"><div><div class="kicker">04 / BEFORE YOU TRADE</div><h2>下单前 · 911 交易检查表</h2></div><p>逐项确认，减少冲动交易</p></div>
+ <div class="checklist">
+  <label class="check"><input type="checkbox">趋势方向是否符合系统规则？</label>
+  <label class="check"><input type="checkbox">入场信号是否真实触发，而非主观猜测？</label>
+  <label class="check"><input type="checkbox">止损位置和最大亏损是否提前确定？</label>
+  <label class="check"><input type="checkbox">仓位、杠杆和保证金是否在限制内？</label>
+  <label class="check"><input type="checkbox">是否存在亏损后报复性加仓的冲动？</label>
+  <label class="check"><input type="checkbox">退出规则是否明确，是否愿意严格执行？</label>
+ </div>
+</section>
+</main>
+
+<footer><div class="wrap foot"><div><b>911</b><div>花有重开日 · 人无再少年</div></div><div>内容说明：本页面为读书笔记与交易思想提炼。语句为 911 整理改写，不应视为 CIS 原书逐字引文或投资建议。</div></div></footer>
+
+<script>
+/* ---------- 主题切换 ---------- */
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),meta=document.getElementById('metaTheme');
+  var KEY='cis911-theme';
+  function apply(t){
+    root.setAttribute('data-theme',t);
+    label.textContent = t==='dark' ? '浅色' : '深色';
+    btn.setAttribute('aria-label', t==='dark' ? '切换到浅色模式' : '切换到深色模式');
+    meta.setAttribute('content', t==='dark' ? '#101114' : '#faf8f3');
+  }
+  var saved=null;
+  try{saved=localStorage.getItem(KEY);}catch(e){}
+  apply(saved==='dark'?'dark':'light');   /* 默认浅色 */
+  btn.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  });
+})();
+
+/* ---------- 筛选与搜索 ---------- */
+const buttons=[...document.querySelectorAll('.filter')],cards=[...document.querySelectorAll('.card')],search=document.getElementById('search');
+let active='all';
+function update(){
+  const q=search.value.trim().toLowerCase();let count=0;
+  cards.forEach(c=>{const ok=(active==='all'||c.dataset.cat===active)&&c.innerText.toLowerCase().includes(q);c.style.display=ok?'block':'none';if(ok)count++;});
+  document.getElementById('empty').style.display=count?'none':'block';
+}
+buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');active=b.dataset.filter;update();}));
+search.addEventListener('input',update);
+</script>
+</body></html>
